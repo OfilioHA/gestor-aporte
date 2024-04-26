@@ -1,7 +1,3 @@
-
-
-export default function PageDashboard(){
-
-    return <h1>123qwe</h1>
-
+export default function PageDashboard() {
+  return <h1>login</h1>;
 }
