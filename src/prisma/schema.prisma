@@ -1,0 +1,68 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           Int        @id @default(autoincrement())
+  name         String
+  password     String
+  dependencyId Int
+  Dependecy    Dependency @relation(fields: [dependencyId], references: [id])
+}
+
+model Dependency {
+  id       Int        @id @default(autoincrement())
+  name     String
+  Users    User[]
+  Personal Personal[]
+  Period   Period[]
+}
+
+model Personal {
+  id           Int        @id @default(autoincrement())
+  firstnames   String
+  lastnames    Int
+  dependencyId Int
+  createdAt    DateTime
+  Dependecy    Dependency @relation(fields: [dependencyId], references: [id])
+  Deposit      Deposit[]
+}
+
+model Support {
+  id        Int       @id @default(autoincrement())
+  name      String
+  minimun   Float
+  isActive  Boolean   @default(false)
+  createdAt DateTime
+  Deposit   Deposit[]
+}
+
+model Period {
+  id           Int        @id @default(autoincrement())
+  dependencyId Int
+  name         String
+  isActive     Boolean    @default(false)
+  createdAt    DateTime
+  Deposit      Deposit[]
+  Dependecy    Dependency @relation(fields: [dependencyId], references: [id])
+}
+
+model Deposit {
+  id         Int      @id @default(autoincrement())
+  personalId Int
+  supportId  Int
+  periodId   Int
+  amount     Float
+  madeAt     DateTime
+  Support    Support  @relation(fields: [supportId], references: [id])
+  Personal   Personal @relation(fields: [personalId], references: [id])
+  Period     Period   @relation(fields: [periodId], references: [id])
+}
