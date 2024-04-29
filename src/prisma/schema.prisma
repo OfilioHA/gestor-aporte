@@ -51,6 +51,7 @@ model Period {
   name         String
   isActive     Boolean    @default(false)
   createdAt    DateTime
+  finishedAt   DateTime
   Deposit      Deposit[]
   Dependecy    Dependency @relation(fields: [dependencyId], references: [id])
 }

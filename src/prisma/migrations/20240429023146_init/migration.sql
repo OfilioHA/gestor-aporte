@@ -39,6 +39,7 @@ CREATE TABLE "Period" (
     "name" TEXT NOT NULL,
     "isActive" BOOLEAN NOT NULL DEFAULT false,
     "createdAt" DATETIME NOT NULL,
+    "finishedAt" DATETIME NOT NULL,
     CONSTRAINT "Period_dependencyId_fkey" FOREIGN KEY ("dependencyId") REFERENCES "Dependency" ("id") ON DELETE RESTRICT ON UPDATE CASCADE
 );
 
