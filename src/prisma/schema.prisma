@@ -29,7 +29,8 @@ model Dependency {
 model Personal {
   id           Int        @id @default(autoincrement())
   firstnames   String
-  lastnames    Int
+  lastnames    String
+  genderId     Int
   dependencyId Int
   createdAt    DateTime
   Dependecy    Dependency @relation(fields: [dependencyId], references: [id])
@@ -48,10 +49,10 @@ model Support {
 model Period {
   id           Int        @id @default(autoincrement())
   dependencyId Int
-  name         String
+  month        Int
   isActive     Boolean    @default(false)
   createdAt    DateTime
-  finishedAt   DateTime
+  finishedAt   DateTime?
   Deposit      Deposit[]
   Dependecy    Dependency @relation(fields: [dependencyId], references: [id])
 }
